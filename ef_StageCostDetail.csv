@@ -1,0 +1,2 @@
+FirstStage, RootNode, S1, FirstStageCost, None, 0.0
+SecondStage, N1, S1, SecondStageCost, None, 84365.66946066708
