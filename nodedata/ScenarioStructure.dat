@@ -1,37 +1,48 @@
-set Stages := FirstStage SecondStage ;
+set Stages := FirstStage SecondStage ThirdStage ;
 
 set Nodes := RootNode
-             N1 ;
+             N1
+             N2 ;
 
 param NodeStage := RootNode         FirstStage
-                   N1               SecondStage ;
+                   N1               SecondStage
+                   N2               ThirdStage ;
 
 set Children[RootNode] := N1 ;
 
+set Children[N1]       := N2 ;
+
 param ConditionalProbability := RootNode          1.0
-                                N1                1.0 ;
+                                N1                1.0
+                                N2                1.0 ;
 
 set Scenarios := S1 ;
 
 param ScenarioLeafNode :=
-                    S1         N1 ;
+                    S1         N2 ;
 
 set StageVariables[FirstStage] :=  x[*,*]
                                    c[*,*]
                                    d[*,*]
                                    u_sch[*]
                                    p_pm_pred[*]
-                                   z ;
+                                   z
+                                   l_act[*] ;
 
 set StageVariables[SecondStage] := p_da_act[*]
                                    cvar
                                    prices[*,*]
-                                   prices_rt[*,*]
                                    pred_cost
-                                   load_scenarios[*,*]
-                                   no_storage_cost ;
+                                   load_scenarios[*,*] ;
+
+set StageVariables[ThirdStage] := load_diff_rt[*,*]
+                                  prices_rt[*,*]
+                                  total_prices[*,*]
+                                  no_storage_cost
+                                  da_pred_prices ;
 
 param StageCost := FirstStage  FirstStageCost
-                   SecondStage SecondStageCost ;
+                   SecondStage SecondStageCost
+                   ThirdStage  ThirdStageCost ;
 
 param ScenarioBasedData := False ;
